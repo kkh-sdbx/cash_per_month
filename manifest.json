@@ -4,13 +4,14 @@
   "description": "low-cost dividend ETFs and stocks for financial freedom",
   "version": "0.1",
   "icons": {
-    "16": "images/icon-16.png",
-    "32": "images/icon-32.png",
-    "48": "images/icon-48.png",
-    "128": "images/icon-128.png"
+    "16": "c_p_m16.png",
+    "32": "c_p_m1632.png",
+    "48": "c_p_m1648.png",
+    "128": "c_p_m16128.png"
   },
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_title": "Click to view a popup",
   "background": {
     "service_worker": "service-worker.js"
   },
