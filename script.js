@@ -25,8 +25,24 @@ const ASSET = {"ticker":"SCHD",
 "dividendGrowth":0.11,
 "priceGrowthPerYear":0.1,
 "MDDin10Years":0.2
-"dividend"
+"dividendFrequency":3 //3달마다(===분기) 배당.
 }
 }
 
+
+// input을 받아서 진행해야 한다. 여기선 예시만,
+// 포트폴리오 비중 큰 순으로 iterate, sort.
+
+let SELECTED_PORTFOLIO = new Map([]);
+
+
 // N년간 월 배당금을 계산하는 함수
+
+function showDividends(years,portfolio){
+
+for (let i=1;i<=years;i++){
+
+//portfolio의 자료 구성을 검토해야 한다.
+}
+
+}
