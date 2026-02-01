@@ -1,8 +1,5 @@
+// 136.111.155.228
 
-
-
-
-alert("Google Extension!");
 
 /*
     <tr class "resultTitle">
@@ -19,7 +16,22 @@ alert("Google Extension!");
 
 let resultTitle = document.querySelector(".resultTitle");
 // 위의 tr 가져옴.
+const ping = document.querySelector("#ping");
+const apiImage = document.querySelector("#apiImage");
 
+
+ping.addEventListener("click",()=>{
+	console.log("ping clicked!");
+	fetch("http://136.111.155.228:3000/random-fox")
+	.then(response=>response.json())
+	.then(data=>{
+		console.log(data);
+		apiImage.src = data.imageURL;
+	})
+	.catch((error)=>{
+		console.error("ERROR: ", error);
+	});
+});
 
 // 개별종목의 데이터 구조, 예시로 든다.
 const ASSET = {"ticker":"SCHD",
