@@ -1,3 +1,7 @@
+
+
+
+
 alert("Google Extension!");
 
 /*
@@ -24,7 +28,7 @@ const ASSET = {"ticker":"SCHD",
 "dividend":0.7,
 "dividendGrowth":0.11,
 "priceGrowthPerYear":0.1,
-"MDDin10Years":0.2
+"MDDin10Years":0.2,
 "dividendFrequency":3 //3달마다(===분기) 배당.
 }
 }
