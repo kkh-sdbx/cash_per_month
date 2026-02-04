@@ -75,9 +75,11 @@ app.listen(port, () => {
   </div>
 </body>
 
-<script src = "script.js">
-  //팝업에서 사용되는 모든 JavaScript는 별도의 파일에 있어야 합니다.
-  //https://kkh-sdbx.github.io/cash_per_month/
+<script>
+  const ping = document.getElementById("ping");
+
+  ping.addEventListener("click",()=>{
+	  ping.fetch
 </script>
 </html>
 

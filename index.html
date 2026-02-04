@@ -1,0 +1,76 @@
+<html>
+
+<head>
+<title>Hello Google!</title>
+</head>
+<style>
+#pingsPongs{
+	background-color : cyan;
+} 
+#ping{
+	background-color : green;
+}
+</style>
+
+<body>
+  <h1>It's Working!!</h1>
+  <table id ="result">
+    <h2> If you start investing $TOTALAMOUNT, 000% in XXX, 000% in YYY... </h2>
+    <h2> while cashing out AAA% || $BBB per month </h2>
+    <h2> for next CC years, this will happen </h2>
+    <tr class "resultTitle">
+      <td> YEAR </td>
+      <td> Portfolio Name </td>
+      <td> Monthly Dividend(월 배당금) </td>
+      <td> Total Input(원금) </td>
+      <td> Yearly Dividend rate(배당률) </td>
+      <td> Estimated Tax rate(세율) </td>
+      <td> Estimated Tax amount(세금) </td>
+      <td> Estimated Tax amount(세금) </td>
+      <td> (총액) </td>
+    </tr>
+    <tr class "na">
+      <td> YEAR 1 </td>
+      <td> something 1</td>
+    </tr>
+    <tr class "na">
+      <td> YEAR 2 </td>
+      <td> something 2</td>
+    </tr>
+    
+    
+  </table>
+  
+  
+  <div id = "pingsPongs">
+		<h1> ping pond area</h1>
+		<button id = "ping" color = "green"> LET'S GOOOOO!!!</button>
+		<img id = "apiImage"> </img>
+
+  </div>
+</body>
+
+<script >
+const ping = document.getElementById("ping");
+
+ping.addEventListener("click",()=>{
+	fetch("http://136.111.155.228:3000")
+		.then(response=>{
+            if(!response.ok){
+                throw new Error("Network response was not ok "+response.statusText);
+            };
+            return response.json();
+        })
+        .then(data=>{
+            console.log("Success:",data);
+        })
+        .catch(error=>{
+            console.error("Error:",error)
+        });
+	
+
+})
+
+
+</script>
+</html>
