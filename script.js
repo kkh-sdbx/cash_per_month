@@ -1,7 +1,48 @@
 // 136.111.155.228
 
 
-/*
+const express = require('express');
+const axios = require('axios');
+const cors = require('cors');
+const app = express();
+const port = 3000;
+
+app.use(cors());
+app.get("/api-test",async (req, res) => {
+    try {
+        const response = await axios.get('https://api.github.com');
+        res.json({"data": response.data });
+    } catch (error) {
+        res.status(500).send('Error fetching data from GitHub API');
+    }
+});
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
+
+
+    /**
+ * 
+ * <html>
+
+<head>
+<title>Hello Google!</title>
+</head>
+<style>
+#pingsPongs{
+	background-color : cyan;
+} 
+#ping{
+	background-color : green;
+}
+</style>
+
+<body>
+  <h1>It's Working!!</h1>
+  <table id ="result">
+    <h2> If you start investing $TOTALAMOUNT, 000% in XXX, 000% in YYY... </h2>
+    <h2> while cashing out AAA% || $BBB per month </h2>
+    <h2> for next CC years, this will happen </h2>
     <tr class "resultTitle">
       <td> YEAR </td>
       <td> Portfolio Name </td>
@@ -12,53 +53,32 @@
       <td> Estimated Tax amount(세금) </td>
       <td> Estimated Tax amount(세금) </td>
       <td> (총액) </td>
-*/
+    </tr>
+    <tr class "na">
+      <td> YEAR 1 </td>
+      <td> something 1</td>
+    </tr>
+    <tr class "na">
+      <td> YEAR 2 </td>
+      <td> something 2</td>
+    </tr>
+    
+    
+  </table>
+  
+  
+  <div id = "pingsPongs">
+		<h1> ping pond area</h1>
+		<button id = "ping" color = "green"> LET'S GOOOOO!!!</button>
+		<img id = "apiImage"> </img>
 
-let resultTitle = document.querySelector(".resultTitle");
-// 위의 tr 가져옴.
-const ping = document.querySelector("#ping");
-const apiImage = document.querySelector("#apiImage");
+  </div>
+</body>
 
+<script src = "script.js">
+  //팝업에서 사용되는 모든 JavaScript는 별도의 파일에 있어야 합니다.
+  //https://kkh-sdbx.github.io/cash_per_month/
+</script>
+</html>
 
-ping.addEventListener("click",()=>{
-	console.log("ping clicked!");
-	fetch("http://136.111.155.228:3000/random-fox")
-	.then(response=>response.json())
-	.then(data=>{
-		console.log(data);
-		apiImage.src = data.imageURL;
-	})
-	.catch((error)=>{
-		console.error("ERROR: ", error);
-	});
-});
-
-// 개별종목의 데이터 구조, 예시로 든다.
-const ASSET = {"ticker":"SCHD",
-"nums":{
-"price":27.4,
-"dividend":0.7,
-"dividendGrowth":0.11,
-"priceGrowthPerYear":0.1,
-"MDDin10Years":0.2,
-"dividendFrequency":3 //3달마다(===분기) 배당.
-}
-}
-
-
-// input을 받아서 진행해야 한다. 여기선 예시만,
-// 포트폴리오 비중 큰 순으로 iterate, sort.
-
-let SELECTED_PORTFOLIO = new Map([]);
-
-
-// N년간 월 배당금을 계산하는 함수
-
-function showDividends(years,portfolio){
-
-for (let i=1;i<=years;i++){
-
-//portfolio의 자료 구성을 검토해야 한다.
-}
-
-}
+ */
