@@ -1,14 +1,39 @@
-<html>
+// 136.111.155.228
+
+
+const express = require('express');
+const axios = require('axios');
+const cors = require('cors');
+const app = express();
+const port = 3000;
+
+app.use(cors());
+app.get("/api-test",async (req, res) => {
+    try {
+        const response = await axios.get('https://api.github.com');
+        res.json({"data": response.data });
+    } catch (error) {
+        res.status(500).send('Error fetching data from GitHub API');
+    }
+});
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
+
+
+    /**
+ * 
+ * <html>
 
 <head>
 <title>Hello Google!</title>
 </head>
 <style>
 #pingsPongs{
-	background-color : cyan;
+    background-color : cyan;
 } 
 #ping{
-	background-color : green;
+    background-color : green;
 }
 </style>
 
@@ -43,34 +68,19 @@
   
   
   <div id = "pingsPongs">
-		<h1> ping pond area</h1>
-		<button id = "ping" color = "green"> LET'S GOOOOO!!!</button>
-		<img id = "apiImage"> </img>
+        <h1> ping pond area</h1>
+        <button id = "ping" color = "green"> LET'S GOOOOO!!!</button>
+        <img id = "apiImage"> </img>
 
   </div>
 </body>
 
-<script >
-const ping = document.getElementById("ping");
+<script>
+  const ping = document.getElementById("ping");
 
-ping.addEventListener("click",()=>{
-	fetch("http://136.111.155.228:3000")
-		.then(response=>{
-            if(!response.ok){
-                throw new Error("Network response was not ok "+response.statusText);
-            };
-            return response.json();
-        })
-        .then(data=>{
-            console.log("Success:",data);
-        })
-        .catch(error=>{
-            console.error("Error:",error)
-        });
-	
-
-})
-
-
+  ping.addEventListener("click",()=>{
+      ping.fetch
 </script>
 </html>
+
+ */
