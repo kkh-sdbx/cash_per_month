@@ -38,7 +38,7 @@ app.get("/getAPI",async (req, res) => {
 
     /**
  * 
- * <html>
+<html>
 
 <head>
 <title>Hello Google!</title>
@@ -86,15 +86,52 @@ app.get("/getAPI",async (req, res) => {
         <h1> ping pond area</h1>
         <button id = "ping" color = "green"> LET'S GOOOOO!!!</button>
         <img id = "apiImage"> </img>
+        <button id = "getAPI">!! GET API !!</button>
 
   </div>
 </body>
 
 <script>
   const ping = document.getElementById("ping");
+  const getAPI= document.getElementById("getAPI");
+  ping.addEventListener("click", async ()=>{
+	try{
+		const response = await fetch("http://136.111.155.228:3000/justGet");
 
-  ping.addEventListener("click",()=>{
-      ping.fetch
+		if(!response.ok){
+			throw new Error("something is wrong!" + response.status);
+		}
+
+		const data = await response.text();
+		console.log(response);
+		console.log(data);
+	}
+	catch(error){
+		console.error("error: ", error );
+
+
+	}
+
+  });
+  getAPI.addEventListener("click", async ()=>{
+	try{
+		const response = await fetch("http://136.111.155.228:3000/getAPI");
+
+		if(!response.ok){
+			throw new Error("something is wrong!" + response.status);
+		}
+
+		const data = await response.json();
+		console.log(response);
+		console.log(data);
+	}
+	catch(error){
+		console.error("error: ", error );
+
+
+	}
+
+  });
 </script>
 </html>
 
