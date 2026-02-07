@@ -26,7 +26,7 @@ app.get("/justGet",async (req, res) => {
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
-app.get("getAPI",async (req, res) => {
+app.get("/getAPI",async (req, res) => {
     try {
         const response = await axios.get(TEST_CALL + KEY);
         res.json({"data": response.data });
@@ -99,3 +99,4 @@ app.get("getAPI",async (req, res) => {
 </html>
 
  */
+
