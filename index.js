@@ -7,17 +7,32 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
+const BASE_URL = "http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc";
+const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?inqryDiv=1&inqryBgnDt=201606010000&inqryEndDt=201606052359&pageNo=1&numOfRows=10&ServiceKey=";
+const KEY = "dc7859da057c28638552ee4b7c007de473ddb27de74590f2c284b4ecb9016062"; 
+
+
+
 app.use(cors());
-app.get("/api-test",async (req, res) => {
+app.get("/justGet",async (req, res) => {
     try {
-        const response = await axios.get('https://api.github.com');
-        res.json({"data": response.data });
+        const response = await "connection DONE!";
+        res.send(response);
     } catch (error) {
-        res.status(500).send('Error fetching data from GitHub API');
+        console.error("something is wrong!");
+        res.status(500).json({"success":false, "message":error});
     }
 });
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
+});
+app.get("getAPI",async (req, res) => {
+    try {
+        const response = await axios.get(TEST_CALL + KEY);
+        res.json({"data": response.data });
+    } catch (error) {
+        res.status(500).send('Error fetching data from GitHub API');
+    }
 });
 
 
