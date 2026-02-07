@@ -10,7 +10,7 @@ const port = 3000;
 const BASE_URL = "http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc";
 const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?inqryDiv=1&inqryBgnDt=201606010000&inqryEndDt=201606052359&pageNo=1&numOfRows=10&ServiceKey=";
 const KEY = "dc7859da057c28638552ee4b7c007de473ddb27de74590f2c284b4ecb9016062"; 
-
+const TYPE_JSON = "&type=json";
 
 
 app.use(cors());
@@ -28,7 +28,7 @@ app.listen(port, () => {
 });
 app.get("/getAPI",async (req, res) => {
     try {
-        const response = await axios.get(TEST_CALL + KEY);
+        const response = await axios.get(TEST_CALL + KEY + TYPE_JSON);
         res.json({"data": response.data });
     } catch (error) {
         res.status(500).send('Error fetching data from GitHub API');
