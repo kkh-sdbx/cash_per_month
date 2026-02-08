@@ -20,6 +20,24 @@ ServiceKey=인증키
  * 
  */
 /**
+ * 조회구분c=1&조회시작일시inqryBgnDt=20260101&조회종료일시inqryEndDt=20260210(cron job 일시)
+ * 
+ * 불러와야 할 내용 목록
+ *  "사전검토출처" :,
+    "공고월" : rcptDt,
+    "사전/공고" :"공고",
+    "입찰/투찰" :"입찰",
+    "고객사" :orderInsttNm,
+    "사업명" :prcrmntReqNm,
+    "금액" :totCnstwkScleAmt,
+    "제출일시":inptDt,
+    "전자투찰" :,
+    "PT일시" :,
+    "URL":"prcrmntReqInfoUrl"
+ * 
+ */
+
+/**
  * 필수옵션
  * numOfRows	한 페이지 결과 수	4	1	10	한 페이지 결과 수
 pageNo	페이지 번호	4	1	1	페이지 번호
