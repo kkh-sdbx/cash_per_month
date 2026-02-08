@@ -1,20 +1,22 @@
 import EVENT_TARGET_BUNDLE from "./EVENT_TARGETS.js";
 // // API_CALLER는 axios로 api call만,
 const axios = require('axios');
-const BASE_URL = "http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListCnstwkPPSSrch";
+const BASE_URL = "http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?";
 const TYPE_JSON = "&type=json";
-//http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListCnstwkPPSSrch?
+//http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?
+
+const MANDATORY_QUERY = "&inqryDiv=1&inqryBgnDt=202602010930&inqryEndDt=202602100730&pageNo=1&numOfRows=100"
 /**
  * 여기서부터 쿼리 스트링.
 inqryDiv=1
 &
-inqryBgnDt=201606010000
+inqryBgnDt=202602010930
 &
-inqryEndDt=201606052359
+inqryEndDt=202602100730
 &
 pageNo=1
 &
-numOfRows=10
+numOfRows=100
 &
 ServiceKey=인증키
  * 
@@ -50,8 +52,9 @@ c	조회구분	1	1	1	검색하고자하는 조회구분
  */
 const CALLAPI = ()=>{
 
-    const testCall = ()=>{
-
+    const testCall = async (apiKey)=>{
+        const response = await axios.get(BASE_URL + MANDATORY_QUERY + TYPE_JSON + "&" + apiKey);
+        console.log(response);
 
     };
 
