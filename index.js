@@ -4,15 +4,17 @@ import CALLAPI from "/API_CALLER.js";
 require("dotenv").config();
 const APIKEY = process.env.API_KEY;
 const express = require('express');
-const axios = require('axios');
+
 const cors = require('cors');
 const app = express();
 const port = 3000;
 
-const BASE_URL = "http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc";
+
 const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?inqryDiv=1&inqryBgnDt=201606010000&inqryEndDt=201606052359&pageNo=1&numOfRows=10&ServiceKey=";
-const KEY = "";
-const TYPE_JSON = "&type=json";
+
+// // index는 
+// // 1.express만 require해서 클라이언트와 통신 
+// // 2. Event 듣고 하위 모듈들의 메서드 콜.
 
 
 app.use(cors());
