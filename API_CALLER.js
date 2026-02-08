@@ -54,7 +54,7 @@ c	조회구분	1	1	1	검색하고자하는 조회구분
 const CALLAPI = ()=>{
 
     const testCall = async (apiKey)=>{
-        const response = await axios.get(BASE_URL + MANDATORY_QUERY + TYPE_JSON + "&" + apiKey);
+        const response = await axios.get(BASE_URL + MANDATORY_QUERY + TYPE_JSON + "&ServiceKey=" + apiKey);
         console.log("test call finished! response is :",response);
 
     };
