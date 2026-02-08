@@ -26,7 +26,7 @@ app.get("/justGet",async (req, res) => {
         const response = await testResult;
         res.json(response);
     } catch (error) {
-        console.error("something is wrong!");
+        console.error("something is wrong!",error);
         res.status(500).json({"success":false, "message":error});
     }
 });
