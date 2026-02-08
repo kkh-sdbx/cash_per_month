@@ -1,7 +1,8 @@
 import EVENT_TARGET_BUNDLE from "/EVENT_TARGETS.js";
 
 
-
+require("dotenv").config();
+const APIKEY = process.env.API_KEY;
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
