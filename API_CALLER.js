@@ -13,7 +13,7 @@ inqryDiv=1
 &
 inqryBgnDt=202602010930
 &
-inqryEndDt=202602100730
+inqryEndDt=202602080730
 &
 pageNo=1
 &
