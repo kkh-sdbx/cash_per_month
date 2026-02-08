@@ -6,7 +6,9 @@ const CALLAPI = ()=>{
 
     return function (){
 
-        
+
     }
 };
+
+export default CALLAPI
 
