@@ -55,7 +55,7 @@
 
   ping.addEventListener("click", async ()=>{
 	try{
-		const response = await fetch("http://35.226.25.54:3000/justGet");
+		const response = await fetch("/justGet");
 
 		if(!response.ok){
 			throw new Error("something is wrong!" + response.status);
@@ -75,7 +75,7 @@
   });
   getAPI.addEventListener("click", async ()=>{
 	try{
-		const response = await fetch("http://136.111.155.228:3000/getAPI");
+		const response = await fetch("/getAPI");
 
 		if(!response.ok){
 			throw new Error("something is wrong!" + response.status);
