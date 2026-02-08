@@ -6,9 +6,12 @@ const TYPE_JSON = "&type=json";
 
 const CALLAPI = ()=>{
 
+    const testCall = ()=>{
+        
 
+    };
 
-    return function (){
+    return {
 
 
     }
