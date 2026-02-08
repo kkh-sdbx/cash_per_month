@@ -4,8 +4,8 @@ const CALLAPI = require("./API_CALLER.js");
 require("dotenv").config();
 const APIKEY = process.env.API_KEY;
 const express = require('express');
-
 const cors = require('cors');
+const path = require("path");
 const app = express();
 const port = 3000;
 
