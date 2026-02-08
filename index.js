@@ -43,8 +43,7 @@ app.get("/getAPI",async (req, res) => {
 });
 
 
-    /**
- * 
+/**
 <html>
 
 <head>
@@ -60,34 +59,6 @@ app.get("/getAPI",async (req, res) => {
 </style>
 
 <body>
-  <h1>It's Working!!</h1>
-  <table id ="result">
-    <h2> If you start investing $TOTALAMOUNT, 000% in XXX, 000% in YYY... </h2>
-    <h2> while cashing out AAA% || $BBB per month </h2>
-    <h2> for next CC years, this will happen </h2>
-    <tr class "resultTitle">
-      <td> YEAR </td>
-      <td> Portfolio Name </td>
-      <td> Monthly Dividend(월 배당금) </td>
-      <td> Total Input(원금) </td>
-      <td> Yearly Dividend rate(배당률) </td>
-      <td> Estimated Tax rate(세율) </td>
-      <td> Estimated Tax amount(세금) </td>
-      <td> Estimated Tax amount(세금) </td>
-      <td> (총액) </td>
-    </tr>
-    <tr class "na">
-      <td> YEAR 1 </td>
-      <td> something 1</td>
-    </tr>
-    <tr class "na">
-      <td> YEAR 2 </td>
-      <td> something 2</td>
-    </tr>
-    
-    
-  </table>
-  
   
   <div id = "pingsPongs">
         <h1> ping pond area</h1>
@@ -95,23 +66,51 @@ app.get("/getAPI",async (req, res) => {
         <img id = "apiImage"> </img>
         <button id = "getAPI">!! GET API !!</button>
 
+  </div>  
+  
+  <div>
+  <ul id="searchResult">
+  
+  </ul>
   </div>
+
 </body>
 
 <script>
   const ping = document.getElementById("ping");
   const getAPI= document.getElementById("getAPI");
+  const searchResult= document.getElementById("searchResult");
+
+  const updateSearchResult = (data)=>{
+    let toAdd = "";
+
+    for(let i=0;i<11;i++){
+
+      let biz_org = data.response.body.items[i].orderInsttNm;
+      let biz_name = data.response.body.items[i].prcrmntReqNm;
+      let biz_price = data.response.body.items[i].rprsntUprc;
+
+      toAdd = `${biz_org} ${biz_name} ${biz_price}`;
+      let added_li = document.createElement("li");
+      added_li.innerHTML = toAdd;
+      searchResult.appendChild(added_li);
+    }
+    
+    
+  };
+
   ping.addEventListener("click", async ()=>{
 	try{
-		const response = await fetch("http://136.111.155.228:3000/justGet");
+		const response = await fetch("http://35.226.25.54:3000/justGet");
 
 		if(!response.ok){
 			throw new Error("something is wrong!" + response.status);
 		}
 
-		const data = await response.text();
-		console.log(response);
+		const data = await response.json();
 		console.log(data);
+    updateSearchResult(data);
+
 	}
 	catch(error){
 		console.error("error: ", error );
