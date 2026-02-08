@@ -1,5 +1,5 @@
-import EVENT_TARGET_BUNDLE from "/EVENT_TARGETS.js";
-import CALLAPI from "/API_CALLER.js";
+import EVENT_TARGET_BUNDLE from "./EVENT_TARGETS.js";
+import CALLAPI from "./API_CALLER.js";
 
 require("dotenv").config();
 const APIKEY = process.env.API_KEY;

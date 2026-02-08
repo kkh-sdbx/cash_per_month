@@ -1,4 +1,4 @@
-import EVENT_TARGET_BUNDLE from "/EVENT_TARGETS.js";   
+import EVENT_TARGET_BUNDLE from "./EVENT_TARGETS.js";   
 
 // // API_CALLER가 전달해준 JSON 중 조건에 맞는 자료만 정리
 
