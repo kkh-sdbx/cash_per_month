@@ -56,7 +56,7 @@ const CALLAPI = ()=>{
     const testCall = async (apiKey)=>{
         const response = await axios.get(BASE_URL + MANDATORY_QUERY + TYPE_JSON + "&ServiceKey=" + apiKey);
         console.log("test call finished! response is :",response);
-        return response
+        return response.data
     };
 
     return {
