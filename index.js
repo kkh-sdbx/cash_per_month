@@ -9,6 +9,7 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
+const CALLER = CALLAPI();
 
 const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?inqryDiv=1&inqryBgnDt=201606010000&inqryEndDt=201606052359&pageNo=1&numOfRows=10&ServiceKey=";
 
@@ -16,11 +17,13 @@ const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrc
 // // 1.express만 require해서 클라이언트와 통신 
 // // 2. Event 듣고 하위 모듈들의 메서드 콜.
 
+let testResult = CALLER.testCall(APIKEY);
 
 app.use(cors());
+
 app.get("/justGet",async (req, res) => {
     try {
-        const response = await "connection DONE!";
+        const response = await testResult;
         res.send(response);
     } catch (error) {
         console.error("something is wrong!");
