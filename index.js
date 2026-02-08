@@ -24,7 +24,7 @@ app.use(cors());
 app.get("/justGet",async (req, res) => {
     try {
         const response = await testResult;
-        res.send(response);
+        res.json(response);
     } catch (error) {
         console.error("something is wrong!");
         res.status(500).json({"success":false, "message":error});
