@@ -1,5 +1,6 @@
-import EVENT_TARGET_BUNDLE from "./EVENT_TARGETS.js";
+
 // // API_CALLER는 axios로 api call만,
+const EVENT_TARGETS = require("./EVENT_TARGETS.js");
 const axios = require('axios');
 const BASE_URL = "http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?";
 const TYPE_JSON = "&type=json";
@@ -64,5 +65,5 @@ const CALLAPI = ()=>{
     }
 };
 
-export default CALLAPI
+module.exports = CALLAPI;
 
