@@ -30,9 +30,7 @@ app.get("/justGet",async (req, res) => {
         res.status(500).json({"success":false, "message":error});
     }
 });
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+
 app.get("/getAPI",async (req, res) => {
     try {
         const response = await axios.get(TEST_CALL + KEY + TYPE_JSON);
@@ -40,5 +38,17 @@ app.get("/getAPI",async (req, res) => {
     } catch (error) {
         res.status(500).send('Error fetching data from GitHub API');
     }
+    
+});
+
+app.use(express.static(path.join(__dirname, "../frontEnd/dist")));
+
+app.get("*",(req,res)=>{
+
+  res.sendFile(path.join(__dirname,"../frontEnd/dist", "index.html"));  
+});
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });
 
