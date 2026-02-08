@@ -90,7 +90,7 @@ app.get("/getAPI",async (req, res) => {
       let biz_name = data.response.body.items[i].prcrmntReqNm;
       let biz_price = data.response.body.items[i].rprsntUprc;
 
-      toAdd = `${biz_org} ${biz_name} ${biz_price}`;
+      toAdd = `${biz_org} / ${biz_name} / ${biz_price}`;
       let added_li = document.createElement("li");
       added_li.innerHTML = toAdd;
       searchResult.appendChild(added_li);
