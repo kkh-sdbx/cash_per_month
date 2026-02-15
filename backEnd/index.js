@@ -54,7 +54,7 @@ app.use(cors());
 const runPipeline = (apiCallrawData)=>{
     
     return new Promise((resolve, reject)=>{
-        EVENT_TARGETS.DATA_HANDLER_FINISHED.addEventListener("dataHandlerFinished", function endPipeline(event) => {
+        EVENT_TARGETS.DATA_HANDLER_FINISHED.addEventListener("dataHandlerFinished", function endPipeline(event){
     
             EVENT_TARGETS.DATA_HANDLER_FINISHED.removeEventListener("dataHandlerFinished",endPipeline);
             // 프론트엔드 업데이트 로직. 
