@@ -30,7 +30,7 @@ let dataToShow = null;
 
 let testResult = null;
 
-EVENT_TARGETS.CALL_FINISHED.addEventListener("callFinished", (event) => {
+EVENT_TARGETS.CALL_FINISHED.addEventListener("callFinished", (event)=> {
     const filteredData = FILTER.filterTest(event.detail);
   
   // 필터 로직. FILTER.XX

@@ -55,9 +55,10 @@ No.
 const HANDLE_RESULT = ()=>{
   const dataHandlerTest = (filteredData)=>{
     console.log("data handler Test: data handler module works.",filteredData);
+    return filteredData
   }
 
-  return filteredData
+  return dataHandlerTest
 }
 
 module.exports = HANDLE_RESULT;
