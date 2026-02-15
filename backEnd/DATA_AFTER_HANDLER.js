@@ -53,12 +53,12 @@ No.
 */
 
 const HANDLE_RESULT = ()=>{
-  const dataHandlerTest = (filteredData)=>{
-    console.log("data handler Test: data handler module works.",filteredData);
-    return filteredData
-  }
+    const dataHandlerTest = (filteredData)=>{
+      console.log("data handler Test: data handler module works.",filteredData);
+      return filteredData
+    };
 
-  return dataHandlerTest
+  return {dataHandlerTest}
 }
 
 module.exports = HANDLE_RESULT;
