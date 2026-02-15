@@ -2,8 +2,11 @@
 // // API_CALLER는 axios로 api call만,
 const EVENT_TARGETS = require("./EVENT_TARGETS.js");
 console.log("EVENT TARGETS at API_CALLER is ",EVENT_TARGETS);
+
 const axios = require('axios');
+
 const BASE_URL = "http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?";
+
 const TYPE_JSON = "&type=json";
 //http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?
 

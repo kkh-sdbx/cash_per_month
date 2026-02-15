@@ -1,5 +1,7 @@
 const EVENT_TARGETS = require("./EVENT_TARGETS.js");
 const CALLAPI = require("./API_CALLER.js");
+const FILTER_RESULTS = require("./FILTER.js");
+const DATA_HANDLER = require("./DATA_AFTER_HANDLER.js");
 
 require("dotenv").config();
 const APIKEY = process.env.API_KEY;
@@ -10,6 +12,8 @@ const app = express();
 const port = 3000;
 
 const CALLER = CALLAPI();
+const FILTER = FILTER_RESULTS();
+const HANDLE_RESULT = DATA_HANDLER();
 
 const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?inqryDiv=1&inqryBgnDt=201606010000&inqryEndDt=201606052359&pageNo=1&numOfRows=10&ServiceKey=";
 
@@ -21,7 +25,31 @@ const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrc
 
 
 let testResult = CALLER.testCall(APIKEY);
+let filteredResult = null;
+let dataToShow = null;
+EVENT_TARGETS.CALL_FINISHED.dispatchEvent(new CustomEvent("callFinished", { detail: testResult }));
 
+EVENT_TARGETS.CALL_FINISHED.addEventListener("callFinished", (event) => {
+  FILTER.filterTest();
+  
+  // 필터 로직. FILTER.XX
+  //filteredTresult = FILTER.xx();
+    filteredTresult = "filter Done after callFinished Event";
+    console.log("filteredResult: ", filteredResult);
+    EVENT_TARGETS.FILTER_FINISHED.dispatchEvent(new CustomEvent("filterFinished", { detail: filteredResult }));
+});
+
+EVENT_TARGETS.FILTER_FINISHED.addEventListener("filterFinished", (event) => {
+    HANDLE_RESULT.dataHandlerTest();   
+    dataToShow =  event.detail;
+    console.log("data Handler Finished, FrontEnd Update Required: ", dataToShow);
+    EVENT_TARGETS.DATA_HANDLER_FINISHED.dispatchEvent(new CustomEvent("dataHandlerFinished", { detail: dataToShow }));  
+});
+
+EVENT_TARGETS.DATA_HANDLER_FINISHED.addEventListener("dataHandlerFinished", (event) => {
+    
+    // 프론트엔드 업데이트 로직. 
+});
 app.use(cors());
 
 app.get("/justGet",async (req, res) => {

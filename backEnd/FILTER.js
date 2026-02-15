@@ -59,3 +59,17 @@ const KEYWORDS = {
   ]
 
 };
+
+
+
+const FILTER_RESULTS = ()=>{
+  const filterTest = ()=>{
+    console.log("filter Test: filter module works.")
+  }
+
+  return {
+    filterTest
+  }
+}
+
+module.exports = FILTER_RESULTS;

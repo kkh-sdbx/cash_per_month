@@ -51,3 +51,15 @@ No.
   비고
 ]
 */
+
+const HANDLE_RESULT = ()=>{
+  const dataHandlerTest = ()=>{
+    console.log("data handler Test: data handler module works.")
+  }
+
+  return {
+    dataHandlerTest
+  }
+}
+
+module.exports = HANDLE_RESULT;
