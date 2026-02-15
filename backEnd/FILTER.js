@@ -63,8 +63,9 @@ const KEYWORDS = {
 
 
 const FILTER_RESULTS = ()=>{
-  const filterTest = ()=>{
-    console.log("filter Test: filter module works.")
+  const filterTest = (apiCallrawData)=>{
+    console.log("filter Test: filter module works.", apiCallrawData);
+    return apiCallrawData
   }
 
   return {
