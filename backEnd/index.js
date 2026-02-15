@@ -17,6 +17,9 @@ const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrc
 // // 1.express만 require해서 클라이언트와 통신 
 // // 2. Event 듣고 하위 모듈들의 메서드 콜.
 
+// 프로그램의 흐름은 Caller->Filter->Data After Handler
+
+
 let testResult = CALLER.testCall(APIKEY);
 
 app.use(cors());
