@@ -24,10 +24,11 @@ const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrc
 // 프로그램의 흐름은 Caller->Filter->Data After Handler
 
 
-let testResult = CALLER.testCall(APIKEY);
+
 let filteredResult = null;
 let dataToShow = null;
-EVENT_TARGETS.CALL_FINISHED.dispatchEvent(new CustomEvent("callFinished", { detail: testResult }));
+
+let testResult = null;
 
 EVENT_TARGETS.CALL_FINISHED.addEventListener("callFinished", (event) => {
   FILTER.filterTest();
@@ -36,25 +37,42 @@ EVENT_TARGETS.CALL_FINISHED.addEventListener("callFinished", (event) => {
   //filteredTresult = FILTER.xx();
     filteredTresult = "filter Done after callFinished Event";
     console.log("filteredResult: ", filteredResult);
-    EVENT_TARGETS.FILTER_FINISHED.dispatchEvent(new CustomEvent("filterFinished", { detail: filteredResult }));
+    EVENT_TARGETS.FILTER_FINISHED.dispatchEvent(new CustomEvent("filterFinished", { detail: filteredResult, call: event.detail }));
 });
 
 EVENT_TARGETS.FILTER_FINISHED.addEventListener("filterFinished", (event) => {
     HANDLE_RESULT.dataHandlerTest();   
     dataToShow =  event.detail;
     console.log("data Handler Finished, FrontEnd Update Required: ", dataToShow);
-    EVENT_TARGETS.DATA_HANDLER_FINISHED.dispatchEvent(new CustomEvent("dataHandlerFinished", { detail: dataToShow }));  
+    EVENT_TARGETS.DATA_HANDLER_FINISHED.dispatchEvent(new CustomEvent("dataHandlerFinished", { detail: dataToShow, call:dataToShow.call }));  
 });
 
 EVENT_TARGETS.DATA_HANDLER_FINISHED.addEventListener("dataHandlerFinished", (event) => {
     
     // 프론트엔드 업데이트 로직. 
+    console.log("frontEnd Update Logic runs now: ", event.detail);
+
+    //프론트엔드에 전달할 데이터 업데이트
+    testResult = event.detal.call;
+    
+    
 });
+
 app.use(cors());
+
+const getTestResult = ()=>{
+    
+    return testResult
+
+};
+
 
 app.get("/justGet",async (req, res) => {
     try {
-        const response = await testResult;
+        const callRawData = await CALLER.testCall(APIKEY);
+        EVENT_TARGETS.CALL_FINISHED.dispatchEvent(new CustomEvent("callFinished", { detail: callRawData }));
+
+        const response = await getTestResult();
         res.json(response);
     } catch (error) {
         console.error("something is wrong!",error);
