@@ -23,9 +23,9 @@
   </div>  
   
   <div>
-  <ul id="searchResult">
+  <table id="searchResult">
   
-  </ul>
+  </table>
   </div>
 
 </body>
@@ -36,20 +36,51 @@
   const searchResult= document.getElementById("searchResult");
 
   const updateSearchResult = (data)=>{
-    let toAdd = "";
+    /*
+    "공고월" : rcptDt,
+    
+    
+    "금액" :totCnstwkScleAmt,
+    
+    
+    */
 
     for(let i=0;i<11;i++){
+      let added_tr = document.createElement("tr");
 
-      let biz_org = data.response.body.items[i].orderInsttNm;
-      let biz_name = data.response.body.items[i].prcrmntReqNm;
-      let biz_price = data.response.body.items[i].rprsntUprc;
+      //"공고월" : rcptDt,
+      let biz_month = document.createElement("td");
+      biz_month.innerHTML = data.response.body.items[i].orderInsttNm;
 
-      toAdd = `${biz_org} ${biz_name} ${biz_price}`;
-      let added_li = document.createElement("li");
-      added_li.innerHTML = toAdd;
-      searchResult.appendChild(added_li);
+      // "고객사" : orderInsttNm,
+      let biz_org = document.createElement("td");
+      biz_org.innerHTML = data.response.body.items[i].orderInsttNm;
+
+      //"사업명" : prcrmntReqNm,
+      let biz_name = document.createElement("td");
+      biz_name.innerHTML = data.response.body.items[i].prcrmntReqNm;
+
+      //"금액" : totCnstwkScleAmt,
+      let biz_price = document.createElement("td");
+      biz_price.innerHTML = data.response.body.items[i].totCnstwkScleAmt;
+
+      //"제출일시" : inptDt,
+      let biz_dueDate = document.createElement("td");
+      biz_dueDate.innerHTML = data.response.body.items[i].inptDt;
+
+      //"URL" : prcrmntReqInfoUrl
+      let biz_url = document.createElement("td"); 
+      biz_url.innerHTML = data.response.body.items[i].prcrmntReqInfoUrl;
+
+      added_tr.appendChild(biz_month);
+      added_tr.appendChild(biz_org);
+      added_tr.appendChild(biz_name);
+      added_tr.appendChild(biz_price);
+      added_tr.appendChild(biz_dueDate);
+      added_tr.appendChild(biz_url);
+
+      searchResult.appendChild(added_tr);
     }
-    
     
   };
 
