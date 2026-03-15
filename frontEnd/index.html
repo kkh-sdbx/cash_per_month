@@ -106,22 +106,21 @@ table { width: 100%; border-collapse: collapse; background: white; }
   };
 
   getAPI.addEventListener("click", async ()=>{
-	try{
-		const response = await fetch("/getAPI");
+    try{
+      const response = await fetch("/getAPI");
 
-		if(!response.ok){
-			throw new Error("something is wrong!" + response.status);
-		}
+      if(!response.ok){
+        throw new Error("something is wrong!" + response.status);
+      }
 
-		const data = await response.json();
-		console.log(response);
-		console.log(data);
-	}
-	catch(error){
-		console.error("error: ", error );
+      const data = await response.json();
+      console.log(response);
+      console.log(data);
+    }
+    catch(error){
+      console.error("error: ", error );
 
-
-	}
+    }
 
   });
 </script>

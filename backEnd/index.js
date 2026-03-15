@@ -17,11 +17,7 @@ const TYPE_JSON = "&type=json"
 // // 1.express만 require해서 클라이언트와 통신 
 // // 2. Event 듣고 하위 모듈들의 메서드 콜.
 
-
-
 app.use(cors());
-
-
 
 app.get("/getAPI",async (req, res) => {
     try {
