@@ -4,7 +4,7 @@ const FILTER_RESULTS = require("./FILTER.js");
 const DATA_HANDLER = require("./DATA_AFTER_HANDLER.js");
 
 require("dotenv").config();
-const APIKEY = process.env.API_KEY;
+const APIKEY = `&ServiceKey=${process.env.API_KEY}`;
 const express = require('express');
 const cors = require('cors');
 const path = require("path");
@@ -14,8 +14,9 @@ const port = 3000;
 const CALLER = CALLAPI();
 const FILTER = FILTER_RESULTS();
 const HANDLE_RESULT = DATA_HANDLER();
+const TYPE_JSON = "&type=json"
 
-const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?inqryDiv=1&inqryBgnDt=201606010000&inqryEndDt=201606052359&pageNo=1&numOfRows=10&ServiceKey=";
+const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?inqryDiv=1&inqryBgnDt=201606010000&inqryEndDt=201606052359&pageNo=1&numOfRows=10";
 
 // // index는 
 // // 1.express만 require해서 클라이언트와 통신 
@@ -88,7 +89,7 @@ app.get("/justGet",async (req, res) => {
 
 app.get("/getAPI",async (req, res) => {
     try {
-        const response = await axios.get(TEST_CALL + KEY + TYPE_JSON);
+        const response = await axios.get(TEST_CALL + TYPE_JSON + KEY );
         res.json({"data": response.data });
     } catch (error) {
         res.status(500).send('Error fetching data from GitHub API');
