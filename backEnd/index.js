@@ -41,6 +41,7 @@ EVENT_TARGETS.CALL_FINISHED.addEventListener("callFinished", (event)=> {
 });
 
 EVENT_TARGETS.FILTER_FINISHED.addEventListener("filterFinished", (event) => {
+    console.log(HANDLE_RESULT);
     const dataToShow = HANDLE_RESULT.dataHandlerTest(event.detail);   
 
     console.log("data Handler Finished, FrontEnd Update Required: ", dataToShow);
