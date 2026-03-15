@@ -1,7 +1,5 @@
 
 // // API_CALLER는 axios로 api call만,
-const EVENT_TARGETS = require("./EVENT_TARGETS.js");
-console.log("EVENT TARGETS at API_CALLER is ",EVENT_TARGETS);
 
 const axios = require('axios');
 

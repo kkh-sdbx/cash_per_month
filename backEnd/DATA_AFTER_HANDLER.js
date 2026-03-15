@@ -1,4 +1,4 @@
-const EVENT_TARGETS = require("./EVENT_TARGETS.js");
+
 const SHEET_INDEX = {
     "최초공고검토일" :new Date(),
     "최초검토자" :".",
