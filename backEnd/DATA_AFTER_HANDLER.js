@@ -54,7 +54,7 @@ No.
 
 const HANDLE_RESULT = ()=>{
     const dataHandlerTest = (filteredDataToShow)=>{
-      console.log("data handler Test: data handler module works.",filteredData);
+      console.log("data handler Test: data handler module works.",filteredDataToShow);
       return filteredDataToShow
     };
 
