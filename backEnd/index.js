@@ -25,15 +25,6 @@ const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrc
 app.use(cors());
 
 
-app.get("/justGet",async (req, res) => {
-    try {
-        const response = await PIPELINE(APIKEY);
-        res.json(response);
-    } catch (error) {
-        console.error("something is wrong!",error);
-        res.status(500).json({"success":false, "message":error});
-    }
-});
 
 app.get("/getAPI",async (req, res) => {
     try {

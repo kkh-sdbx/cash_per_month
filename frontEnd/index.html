@@ -30,11 +30,8 @@ table { width: 100%; border-collapse: collapse; background: white; }
 <body>
   
   <div id = "pingsPongs">
-        <h1> ping pong area</h1>
-        <button id = "ping" color = "green"> LET'S GOOOOO!!!</button>
-        <img id = "apiImage"> </img>
+        <h1> caller area</h1>
         <button id = "getAPI">!! GET API !!</button>
-
   </div>  
   
   <div id = "table-container">
@@ -108,26 +105,6 @@ table { width: 100%; border-collapse: collapse; background: white; }
     
   };
 
-  ping.addEventListener("click", async ()=>{
-	try{
-		const response = await fetch("/justGet");
-
-		if(!response.ok){
-			throw new Error("something is wrong!" + response.status);
-		}
-
-		const data = await response.json();
-		console.log(data);
-    updateSearchResult(data);
-
-	}
-	catch(error){
-		console.error("error: ", error );
-
-
-	}
-
-  });
   getAPI.addEventListener("click", async ()=>{
 	try{
 		const response = await fetch("/getAPI");
