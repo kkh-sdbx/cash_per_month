@@ -52,15 +52,15 @@ No.
 ]
 */
 
-const HANDLE_RESULT = ()=>{
-    const dataHandlerTest = (filteredDataToShow)=>{
+const DATA_HANDLER = ()=>{
+    const handlerTest = (filteredDataToShow)=>{
       console.log("data handler Test: data handler module works.",filteredDataToShow);
       return filteredDataToShow
     };
 
   return { 
-    dataHandlerTest 
+    handlerTest 
   }
 }
 
-module.exports = HANDLE_RESULT;
+module.exports = DATA_HANDLER;
