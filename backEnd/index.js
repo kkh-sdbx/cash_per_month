@@ -25,8 +25,9 @@ app.use(cors());
 
 app.get("/getAPI",async (req, res) => {
     try {
-        const callDate = toShow[0];
-        const response = toShow[1];
+
+        //toShow = [callTime, dataToShow]
+        const response = toShow;
         res.json(response);
     } catch (error) {
         res.status(500).send('Error fetching data from GitHub API');
