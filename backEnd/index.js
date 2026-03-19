@@ -11,8 +11,7 @@ const port = 3000;
 
 const TYPE_JSON = "&type=json"
 
-// cron으로 긁어와서 
-
+// cron으로 긁어와서 저장하면 된다.
 const toShow = await PIPELINE(APIKEY);
 
 //const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?inqryDiv=1&inqryBgnDt=201606010000&inqryEndDt=201606052359&pageNo=1&numOfRows=10";
