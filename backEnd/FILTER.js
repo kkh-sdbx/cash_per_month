@@ -53,17 +53,13 @@ const KEYWORDS = {
     "프로그램","지원","참여","기업","지역","혁신","디지털","AI","SW","데이터",
     "전문인력","산업","프로젝트","박람회","연수","공모","사회공헌","운영"
   ]
-
 };
-
-
 
 const FILTER_RESULTS = ()=>{
   const filterTest = (apiCallrawData)=>{
     console.log("filter Test: filter module works.", apiCallrawData);
     return apiCallrawData
   }
-
   return {
     filterTest
   }

@@ -9,16 +9,18 @@ const FILTER = FILTER_RESULTS();
 const HANDLER = DATA_HANDLER(); 
 
 const RUN_PIPELINE = async (apikey)=>{
-    
+
+    const callTime = new Date();
+
     const rawData = CALLER.testCall(apikey);
 
     const filteredData = FILTER.filterTest(rawData);
 
     const dataToShow = HANDLER.handlerTest(filteredData);
 
-    return dataToShow
+    const result = [callTime, dataToShow];
+
+    return result
 };
-
-
 
 module.exports = RUN_PIPELINE ;

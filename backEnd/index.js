@@ -11,6 +11,10 @@ const port = 3000;
 
 const TYPE_JSON = "&type=json"
 
+// cron으로 긁어와서 
+
+const toShow = await PIPELINE(APIKEY);
+
 //const TEST_CALL ="http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc?inqryDiv=1&inqryBgnDt=201606010000&inqryEndDt=201606052359&pageNo=1&numOfRows=10";
 
 // // index는 
@@ -21,7 +25,8 @@ app.use(cors());
 
 app.get("/getAPI",async (req, res) => {
     try {
-        const response = await PIPELINE(APIKEY);
+        const callDate = toShow[0];
+        const response = toShow[1];
         res.json(response);
     } catch (error) {
         res.status(500).send('Error fetching data from GitHub API');
