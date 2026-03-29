@@ -8,11 +8,13 @@ const BIZ_CODE = [
 ];
 
 const KEYWORDS = {
+  /*
   "기존": [
     "청년","인턴","일자리","직무","취업","캠프","일경험","혁신","여성","미래",
     "노인","장년","신중년","뉴딜","평생","지역","참여자","기업","체험","온라인",
     "DX","맞춤형","인생","훈련","양성","전문","진로","상생","고용","노동","인재"
   ],
+  */
   "added_revised": [
   "관광","아카데미","강소기업","도전지원","성장프로젝트","청년카페","공직가치","역량교육",
    "시민아카데미","환경산업","데이터인재","사이버교육","인성아카데미","창의행정",
@@ -55,9 +57,15 @@ const KEYWORDS = {
   ]
 };
 
+const KEYWORDS_WEIGHTS = new Map();
+
+
 const FILTER_RESULTS = ()=>{
   const filterTest = (apiCallrawData)=>{
     console.log("filter Test: filter module works.", apiCallrawData);
+    const result = {};
+
+
     return apiCallrawData
   }
   return {
