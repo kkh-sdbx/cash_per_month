@@ -33,14 +33,22 @@ ntceInsttNm 없음
 
 app.use(cors());
 
+let cache = null;
+let lastFetch = 0;
+
 app.get("/getAPI", async (req, res) => {
-  try {
-    const result = await PIPELINE(APIKEY);
-    res.json(result);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("ERROR");
+  const now = Date.now();
+
+  if (cache && now - lastFetch < 60000) {
+    return res.json(cache);
   }
+
+  const result = await PIPELINE(APIKEY);
+
+  cache = result;
+  lastFetch = now;
+
+  res.json(result);
 });
 
 const distPath = path.join(__dirname, "../frontEnd/dist");

@@ -1,7 +1,7 @@
 // 프로그램의 흐름은 Caller->Filter->Data After Handler
 
 const axios = require("axios");
-
+const { filterAndScore } = require("./FILTER.js");
 const BASE_URL =
   "http://apis.data.go.kr/1230000/ao/PrcrmntReqInfoService/getPrcrmntReqInfoListGnrlServc";
 
@@ -118,7 +118,7 @@ const RUN_PIPELINE = async (apiKey) => {
   const todayRaw = await fetchTodayAll(apiKey);
 
   // 2. 필터 + scoring
-  const todayScored = filterAndScore(todayRaw, keywords);
+  const todayScored = filterAndScore(todayRaw);
 
   // 3. 발주처 top 5
   const topAgencies = [

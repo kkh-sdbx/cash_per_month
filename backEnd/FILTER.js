@@ -10,7 +10,11 @@ const final_keywords = [
 
 // ===== 키워드 필터링 + scoring =====
 function calcScore(item) {
-  const text = (item.prcrmntReqNm || "").toLowerCase();
+  const text = (
+  item.prcrmntReqNm ||
+  item.bidNtceNm ||
+  ""
+).toLowerCase();
   let score = 0;
 
   final_keywords.forEach((k) => {
