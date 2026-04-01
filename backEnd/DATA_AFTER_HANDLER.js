@@ -57,6 +57,9 @@ const DATA_HANDLER = () => {
 
     // 1. 상위 5개만 사용
     const top = filteredData.slice(0, 5);
+    top
+    .map((i) => i.ntceInsttNm)
+    .filter(Boolean)
 
     // 2. 발주처 추출
     const agencies = [
@@ -64,12 +67,13 @@ const DATA_HANDLER = () => {
     ];
 
     // 3. 과거 공고 가져오기
-    let pastResults = [];
+    const promises = agencies.map((agency) =>
+      fetchPast(apiKey, agency)
+    );
 
-    for (const agency of agencies) {
-      const past = await fetchPast(apiKey, agency);
-      pastResults.push(...past);
-    }
+    const results = await Promise.all(promises);
+
+    let pastResults = results.flat();
 
     // 4. 결과 합치기
     return {
