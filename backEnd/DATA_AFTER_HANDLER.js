@@ -63,7 +63,9 @@ const DATA_HANDLER = () => {
 
     // 2. 발주처 추출
     const agencies = [
-      ...new Set(top.map((i) => i.ntceInsttNm)),
+      ...new Set(
+        top.map((i) => i.ntceInsttNm).filter(Boolean)
+      ),
     ];
 
     // 3. 과거 공고 가져오기

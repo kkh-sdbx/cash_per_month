@@ -57,15 +57,7 @@ function calcScore(item, keywords) {
 }
 
 // ===== 3. 필터 + 정렬 =====
-function filterAndScore(data, keywords) {
-  return data
-    .map((item) => ({
-      ...item,
-      score: calcScore(item, keywords),
-    }))
-    .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score);
-}
+
 
 // ===== 4. 발주처 기준 과거 조회 =====
 async function fetchPastByAgency(apiKey, agency) {
@@ -92,21 +84,19 @@ async function fetchPastByAgency(apiKey, agency) {
 
     const res = await axios.get(url);
 
-    const items =
-      res.data?.response?.body?.items || [];
+    const itemsRaw = res.data?.response?.body?.items;
 
-    if (!items || items.length === 0) break;
+    let items = [];
 
-    results.push(...items);
+    if (Array.isArray(itemsRaw?.item)) {
+      items = itemsRaw.item;
+    } else if (itemsRaw?.item) {
+      items = [itemsRaw.item];
+    }
 
-    if (items.length < NUM_OF_ROWS) break;
-
-    page++;
+    return results;
   }
-
-  return results;
 }
-
 // ===== MAIN =====
 const RUN_PIPELINE = async (apiKey) => {
   const callTime = new Date();
