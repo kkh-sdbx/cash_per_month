@@ -55,51 +55,37 @@ table { width: 100%; border-collapse: collapse; background: white; }
   const getAPI= document.getElementById("getAPI");
   const searchResult= document.getElementById("searchResult");
 
-  const updateSearchResult = (data)=>{
-    /*
-    "공고월" : rcptDt,
-    "금액" :totCnstwkScleAmt,
-    */
+  const updateSearchResult = (data) => {
+  const items = data.today; // ✅ 핵심
 
-    for(let i=0;i<11;i++){
-      // # table 관련 이슈가 있다. 이건 차후에 수정. #
-      let added_tr = document.createElement("tr");
+  for (let i = 0; i < Math.min(items.length, 20); i++) {
+    const item = items[i];
 
-      //"공고월" : rcptDt,
-      let biz_month = document.createElement("td");
-      biz_month.innerHTML = data.response.body.items[i].rcptDt;
+    let tr = document.createElement("tr");
 
-      // "고객사" : orderInsttNm,
-      let biz_org = document.createElement("td");
-      biz_org.innerHTML = data.response.body.items[i].orderInsttNm;
+    let td1 = document.createElement("td");
+    td1.innerHTML = item.rcptDt || "";
 
-      //"사업명" : prcrmntReqNm,
-      let biz_name = document.createElement("td");
-      biz_name.innerHTML = data.response.body.items[i].prcrmntReqNm;
+    let td2 = document.createElement("td");
+    td2.innerHTML = item.ntceInsttNm || "";
 
-      //"금액" : totCnstwkScleAmt,
-      let biz_price = document.createElement("td");
-      biz_price.innerHTML = data.response.body.items[i].totCnstwkScleAmt;
+    let td3 = document.createElement("td");
+    td3.innerHTML = item.prcrmntReqNm || "";
 
-      //"제출일시" : inptDt,
-      let biz_dueDate = document.createElement("td");
-      biz_dueDate.innerHTML = data.response.body.items[i].inptDt;
+    let td4 = document.createElement("td");
+    td4.innerHTML = item.totCnstwkScleAmt || "";
 
-      //"URL" : prcrmntReqInfoUrl
-      let biz_url = document.createElement("td"); 
-      biz_url.innerHTML = data.response.body.items[i].prcrmntReqInfoUrl;
+    let td5 = document.createElement("td");
+    td5.innerHTML = item.inptDt || "";
 
-      added_tr.appendChild(biz_month);
-      added_tr.appendChild(biz_org);
-      added_tr.appendChild(biz_name);
-      added_tr.appendChild(biz_price);
-      added_tr.appendChild(biz_dueDate);
-      added_tr.appendChild(biz_url);
+    let td6 = document.createElement("td");
+    td6.innerHTML = item.prcrmntReqInfoUrl || "";
 
-      searchResult.appendChild(added_tr);
-    }
-    
-  };
+    tr.append(td1, td2, td3, td4, td5, td6);
+
+    searchResult.appendChild(tr);
+  }
+};
 
   getAPI.addEventListener("click", async ()=>{
     try{
