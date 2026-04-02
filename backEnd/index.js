@@ -37,18 +37,18 @@ let cache = null;
 let lastFetch = 0;
 
 app.get("/getAPI", async (req, res) => {
-  const now = Date.now();
+  try {
+    const result = await PIPELINE(APIKEY);
+    res.json(result);
+  } catch (err) {
+    console.error("ROUTE ERROR:", err.message);
 
-  if (cache && now - lastFetch < 60000) {
-    return res.json(cache);
+    res.json({
+      today: [],
+      past: [],
+      error: "pipeline failed",
+    });
   }
-
-  const result = await PIPELINE(APIKEY);
-
-  cache = result;
-  lastFetch = now;
-
-  res.json(result);
 });
 
 const distPath = path.join(__dirname, "../frontEnd/dist");

@@ -16,13 +16,11 @@ function formatDate(date) {
 const fetchTodayAll = async (apiKey) => {
   const now = new Date();
 
-  // 현재 시점에서 24시간 전으로 날짜 범위 설정
   const start = new Date(now);
-  start.setDate(now.getDate() - 1);  // 1일 전
+  start.setDate(now.getDate() - 1);
 
-  const end = new Date(now);  // 현재 시간
+  const end = new Date(now);
 
-  // 날짜를 YYYYMMDD 형식으로 변환
   const startStr = formatDate(start);
   const endStr = formatDate(end);
 
@@ -30,18 +28,33 @@ const fetchTodayAll = async (apiKey) => {
   let results = [];
 
   while (true) {
-    const url = `${BASE_URL}?ServiceKey=${apiKey}&type=json&pageNo=${page}&numOfRows=${NUM_OF_ROWS}&inqryDiv=1&inqryBgnDt=${startStr}&inqryEndDt=${endStr}`;
+    try {
+      const url = `${BASE_URL}?ServiceKey=${apiKey}&type=json&pageNo=${page}&numOfRows=${NUM_OF_ROWS}&inqryDiv=1&inqryBgnDt=${startStr}&inqryEndDt=${endStr}`;
 
-    const res = await axios.get(url);
-    const items = res.data?.response?.body?.items || [];
+      const res = await axios.get(url);
 
-    if (!items || items.length === 0) break;
+      const itemsRaw = res.data?.response?.body?.items;
 
-    results.push(...items);
+      let items = [];
 
-    if (items.length < NUM_OF_ROWS) break;
+      if (Array.isArray(itemsRaw?.item)) {
+        items = itemsRaw.item;
+      } else if (itemsRaw?.item) {
+        items = [itemsRaw.item];
+      }
 
-    page++;
+      if (items.length === 0) break;
+
+      results.push(...items);
+
+      if (items.length < NUM_OF_ROWS) break;
+
+      page++;
+
+    } catch (err) {
+      console.error("API ERROR:", err.message);
+      break; // 👉 절대 throw 하지 말고 break
+    }
   }
 
   return results;
@@ -106,37 +119,29 @@ async function fetchPastByAgency(apiKey, agency) {
 }
 // ===== MAIN =====
 const RUN_PIPELINE = async (apiKey) => {
-  const callTime = new Date();
+  try {
+    const callTime = new Date();
 
-  // 키워드 (임시)
-  const keywords = ["교육", "청년", "AI", "훈련"];
+    const todayRaw = await fetchTodayAll(apiKey);
 
-  // 1. 오늘 공고
-  const todayRaw = await fetchTodayAll(apiKey);
+    const todayScored = filterAndScore(todayRaw);
 
-  // 2. 필터 + scoring
-  const todayScored = filterAndScore(todayRaw);
+    return {
+      callTime,
+      today: todayScored,
+      past: [], // 👉 일단 버림 (안정성 우선)
+    };
 
-  // 3. 발주처 top 5
-  const topAgencies = [
-    ...new Set(
-      todayScored.slice(0, 5).map((i) => i.ntceInsttNm)
-    ),
-  ];
+  } catch (err) {
+    console.error("PIPELINE ERROR:", err.message);
 
-  // 4. 과거 공고
-  let pastResults = [];
-
-  for (const agency of topAgencies) {
-    const past = await fetchPastByAgency(apiKey, agency);
-    pastResults.push(...past);
+    // 👉 무조건 응답 보냄
+    return {
+      callTime: new Date(),
+      today: [],
+      past: [],
+    };
   }
-
-  return {
-    callTime,
-    today: todayScored,
-    past: pastResults,
-  };
 };
 
 module.exports = RUN_PIPELINE;
