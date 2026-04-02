@@ -9,24 +9,31 @@ const NUM_OF_ROWS = 100;
 
 // ===== util =====
 function formatDate(date) {
-  return date.toISOString().slice(0, 10).replace(/-/g, "") + "0000";
+  return date.toISOString().slice(0, 10).replace(/-/g, "");  // yyyyMMdd 형식 (시간 제외)
 }
 
 // ===== 1. 오늘 공고 전체 =====
-async function fetchTodayAll(apiKey) {
-  const today = new Date();
-  const dateStr = formatDate(today);
+const fetchTodayAll = async (apiKey) => {
+  const now = new Date();
+
+  // 현재 시점에서 24시간 전으로 날짜 범위 설정
+  const start = new Date(now);
+  start.setDate(now.getDate() - 1);  // 1일 전
+
+  const end = new Date(now);  // 현재 시간
+
+  // 날짜를 YYYYMMDD 형식으로 변환
+  const startStr = formatDate(start);
+  const endStr = formatDate(end);
 
   let page = 1;
   let results = [];
 
   while (true) {
-    const url = `${BASE_URL}?&type=json&pageNo=${page}&numOfRows=${NUM_OF_ROWS}&inqryDiv=1&inqryBgnDt=${dateStr}&inqryEndDt=${dateStr}&ServiceKey=${apiKey}`;
+    const url = `${BASE_URL}?ServiceKey=${apiKey}&type=json&pageNo=${page}&numOfRows=${NUM_OF_ROWS}&inqryDiv=1&inqryBgnDt=${startStr}&inqryEndDt=${endStr}`;
 
     const res = await axios.get(url);
-
-    const items =
-      res.data?.response?.body?.items || [];
+    const items = res.data?.response?.body?.items || [];
 
     if (!items || items.length === 0) break;
 
@@ -38,7 +45,7 @@ async function fetchTodayAll(apiKey) {
   }
 
   return results;
-}
+};
 
 // ===== 2. scoring =====
 function calcScore(item, keywords) {
