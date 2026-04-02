@@ -44,9 +44,18 @@ app.get("/getAPI", async (req, res) => {
     console.error("ROUTE ERROR:", err.message);
 
     res.json({
-      today: [],
+      today: [
+        {
+          rcptDt: "ERROR",
+          ntceInsttNm: "SERVER",
+          prcrmntReqNm: "응답 실패",
+          totCnstwkScleAmt: "-",
+          inptDt: "-",
+          prcrmntReqInfoUrl: "-",
+          score: 0,
+        },
+      ],
       past: [],
-      error: "pipeline failed",
     });
   }
 });
