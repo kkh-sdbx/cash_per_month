@@ -21,7 +21,7 @@ async function fetchTodayAll(apiKey) {
   let results = [];
 
   while (true) {
-    const url = `${BASE_URL}?serviceKey=${apiKey}&type=json&pageNo=${page}&numOfRows=${NUM_OF_ROWS}&inqryDiv=1&inqryBgnDt=${dateStr}&inqryEndDt=${dateStr}`;
+    const url = `${BASE_URL}?&type=json&pageNo=${page}&numOfRows=${NUM_OF_ROWS}&inqryDiv=1&inqryBgnDt=${dateStr}&inqryEndDt=${dateStr}&ServiceKey=${apiKey}`;
 
     const res = await axios.get(url);
 
